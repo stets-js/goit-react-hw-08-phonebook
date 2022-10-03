@@ -1,16 +1,23 @@
 //import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts } from 'redux/contactsOperations';
 import { removeContact } from '../../contactSlice';
 import css from './ContactList.module.css';
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contactsReduser.contacts);
-  const filteredName = useSelector(state => state.contactsReduser.filter);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, []);
+
+  const contacts = useSelector(state => state.contacts.contacts.items);
+  console.log(contacts);
+  const filteredName = useSelector(state => state.filter);
   if (!filteredName) {
     return (
       <ul className={css.ul}>
-        {contacts.map(({ id, name, number }) => {
+        {contacts?.map(({ id, name, number }) => {
           return (
             <li className={css.li} key={id}>
               <p>

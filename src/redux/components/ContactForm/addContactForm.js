@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../contactSlice';
+import { addNewContact } from '../../contactSlice';
 import nextId from 'react-id-generator';
 
 import css from './ContactForm.module.css';
@@ -25,7 +25,7 @@ export const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addContact({ id: nextId(), name: name, number: phone }));
+    dispatch(addNewContact({ id: nextId(), name: name, number: phone }));
     formReset();
   };
 

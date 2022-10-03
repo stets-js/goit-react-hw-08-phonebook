@@ -4,7 +4,7 @@ import { filterContact } from '../../contactSlice';
 import css from './Filter.module.css';
 
 const Filter = () => {
-  const filteredName = useSelector(state => state.contactsReduser.filter);
+  const filteredName = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
   return (
