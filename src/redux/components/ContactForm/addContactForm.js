@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { addNewContact } from '../../contactSlice';
 import { addContact } from 'redux/contactsOperations';
 import nextId from 'react-id-generator';
@@ -11,6 +11,7 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const contacts = useSelector(state => state.contacts.contacts.items);
 
   const inputChangeName = e => {
     setName(e.target.value);
@@ -26,6 +27,13 @@ export const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const sameName = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (sameName) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
     dispatch(addContact({ id: nextId(), name: name, number: phone }));
     formReset();
   };

@@ -49,15 +49,12 @@ export const ContactsSlice = createSlice({
     [addContact.pending]: state => {
       state.contacts.isLoading = true;
     },
+
     [addContact.fulfilled]: (state, { payload }) => {
       state.contacts.isLoading = false;
-      const isSameName = state.contacts.items.find(
-        contact => contact.name.toLowerCase() === payload.name.toLowerCase()
-      );
-      isSameName
-        ? alert(`${payload.name} is already in contacts`)
-        : state.contacts.items.push(payload);
+      state.contacts.items.push(payload);
     },
+
     [addContact.rejected]: state => {
       state.contacts.isLoading = false;
     },
