@@ -2,21 +2,22 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts, deleteContact } from 'redux/contactsOperations';
-//import { removeContact } from '../../contactSlice';
 import css from './ContactList.module.css';
 
 const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts.items);
-  const filteredName = useSelector(state => state.filter);
+  const filteredName = useSelector(state => state.contacts.filter);
+  const loader = useSelector(state => state.contacts.contacts.isLoading);
 
   useEffect(() => {
     dispatch(fetchContacts());
-  }, [dispatch]);
+  }, [dispatch, filteredName]);
 
   if (!filteredName) {
     return (
       <ul className={css.ul}>
+        {loader ? <p>Loading...</p> : null}
         {contacts?.map(({ id, name, number }) => {
           return (
             <li className={css.li} key={id}>
@@ -40,9 +41,10 @@ const ContactList = () => {
 
   return (
     <ul className={css.ul}>
+      {loader ? <p>Loading...</p> : null}
       {contacts
-        .filter(contacts =>
-          contacts.name.toLowerCase().includes(filteredName.toLowerCase())
+        ?.filter(contact =>
+          contact.name.toLowerCase().includes(filteredName.toLowerCase())
         )
         .map(({ id, name, number }) => {
           return (
