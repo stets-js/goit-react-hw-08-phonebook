@@ -1,0 +1,32 @@
+.header {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 100px;
+}
+
+.navLink {
+  text-decoration: none;
+  padding-left: 10px;
+  width: 170px;
+  height: 50px;
+  font-size: 20px;
+  border: 3;
+  letter-spacing: 3px;
+  line-height: 50px;
+  outline: transparent;
+  /* text */
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+    0px -4px 10px rgba(255, 255, 255, 0.3);
+}

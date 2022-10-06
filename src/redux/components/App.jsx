@@ -1,18 +1,32 @@
-import ContactForm from './ContactForm/addContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
-import css from './App.module.css';
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+//import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+import Layout from '../components/Layout/Layout';
 
+const LoginPage = lazy(() => import('../pages/LoginPage'));
+const Register = lazy(() => import('../pages/Register'));
+const Contacts = lazy(() => import('../pages/ContactsPage'));
 
 const App = () => {
-return (
-    <div className={css.container}>
-      <h1 className={css.title}>Phonebook</h1>
-      <ContactForm />
-      <h2 className={css.title}>Contacts</h2>
-      <Filter />
-      <ContactList /> 
-    </div>
+  return (
+    <Layout>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route element={<PublicRoute />}>
+            <Route index path="/login" element={<LoginPage />}></Route>
+          </Route>
+          <Route element={<PublicRoute />}>
+            <Route path="/register" element={<Register />}></Route>
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/contacts" element={<Contacts />}></Route>
+          </Route>
+          <Route path="*" element={<LoginPage/>}></Route>
+        </Routes>
+      </Suspense>
+    </Layout>
   );
 };
 
