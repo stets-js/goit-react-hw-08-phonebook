@@ -22,7 +22,15 @@ const UserMenu = () => {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+          marginLeft: '250px',
+          marginRight: '50px',
+        }}
+      >
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}

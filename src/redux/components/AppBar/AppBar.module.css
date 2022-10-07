@@ -1,7 +1,7 @@
 .header {
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   padding-top: 30px;
   padding-bottom: 30px;
