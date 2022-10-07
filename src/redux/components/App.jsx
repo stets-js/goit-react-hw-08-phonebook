@@ -23,7 +23,7 @@ const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/contacts" element={<Contacts />}></Route>
           </Route>
-          <Route path="*" element={<LoginPage/>}></Route>
+          <Route path="*" element={<LoginPage />}></Route>
         </Routes>
       </Suspense>
     </Layout>
