@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
   const { data } = await axios.get(
-    'https://633af2d9471b8c395579229b.mockapi.io/contacts'
+    'https://connections-api.herokuapp.com/contacts'
   );
   return data;
 });
@@ -12,7 +12,7 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async contact => {
     const { data } = await axios.post(
-      'https://633af2d9471b8c395579229b.mockapi.io/contacts',
+      'https://connections-api.herokuapp.com/contacts',
       contact
     );
     return data;
@@ -22,9 +22,7 @@ export const addContact = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async id => {
-    await axios.delete(
-      `https://633af2d9471b8c395579229b.mockapi.io/contacts/${id}`
-    );
+    await axios.delete(`https://connections-api.herokuapp.com/contacts/${id}`);
     return id;
   }
 );
