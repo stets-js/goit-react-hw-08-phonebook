@@ -8,10 +8,15 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 //import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+//import PersonAdd from '@mui/icons-material/PersonAdd';
 import Logout from '@mui/icons-material/Logout';
+import { useDispatch, useSelector } from 'react-redux';
+import css from './UserMenu.module.css';
+import { logOut } from '../../auth/authOperations';
 
 const UserMenu = () => {
+  const dispatch = useDispatch();
+  const userName = useSelector(state => state.auth.user.name);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = event => {
@@ -20,6 +25,7 @@ const UserMenu = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <React.Fragment>
       <Box
@@ -27,7 +33,7 @@ const UserMenu = () => {
           display: 'flex',
           alignItems: 'center',
           textAlign: 'center',
-          marginLeft: '250px',
+          marginLeft: 'auto',
           marginRight: '50px',
         }}
       >
@@ -88,15 +94,15 @@ const UserMenu = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <p>Hello Mango</p>
+        <p className={css.userName}>Hello, {userName}!</p>
         <Divider />
-        <MenuItem>
+        {/* <MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add another account
-        </MenuItem>
-        <MenuItem>
+        </MenuItem> */}
+        <MenuItem onClick={() => dispatch(logOut())}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

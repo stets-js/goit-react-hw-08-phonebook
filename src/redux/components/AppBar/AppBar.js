@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import UserMenu from '../UserMenu/UserMenu';
 import css from './AppBar.module.css';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const navMenu = [
   { href: '/login', text: 'Log in' },
@@ -21,16 +22,20 @@ const ItemMenu = styled(NavLink)`
 `;
 
 const AppBar = () => {
+  const isLoggenIn = useSelector(state => state.auth.isLoggedIn);
   return (
     <div className={css.header}>
-      <div className={css.navList}>
-        {navMenu.map(({ href, text }) => (
-          <ItemMenu className={css.navLink} to={href} key={href} end>
-            {text}
-          </ItemMenu>
-        ))}
-      </div>
-      <UserMenu />
+      {isLoggenIn ? (
+        <UserMenu />
+      ) : (
+        <div className={css.navList}>
+          {navMenu.map(({ href, text }) => (
+            <ItemMenu className={css.navLink} to={href} key={href} end>
+              {text}
+            </ItemMenu>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
